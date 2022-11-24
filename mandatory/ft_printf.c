@@ -6,7 +6,7 @@
 /*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 12:01:45 by sspina            #+#    #+#             */
-/*   Updated: 2022/11/24 12:10:32 by sspina           ###   ########.fr       */
+/*   Updated: 2022/11/24 13:18:32 by sspina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static int	puthexa(unsigned long ul, char c, int n)
 	if (c == 'p')
 	{
 		if (n == 1)
-		nb += putstring("0x");
+			nb += putstring("0x");
 		if (ul / 16 > 0)
-		nb += puthexa(ul / 16, c, 0);
+			nb += puthexa(ul / 16, c, 0);
 	}
 	else if ((unsigned int)ul / 16 > 0)
 		nb += puthexa((unsigned int)ul / 16, c, 0);
