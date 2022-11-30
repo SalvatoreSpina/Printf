@@ -8,7 +8,7 @@ CL = rm -rf
 
 SRC =	mandatory/ft_printf.c
 
-SRCB =	*.c
+SRCB =	bonus/ft_printf_bonus.c bonus/flags.c bonus/print_c.c bonus/print_s.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -24,6 +24,8 @@ clean:
 
 fclean: clean
 	@$(CL) $(NAME)
+
+cleant:
 	@rm -rf printfTester
 
 re: fclean all

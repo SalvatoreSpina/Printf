@@ -70,12 +70,7 @@ static int	dispatcher(const char *str, int i, va_list vlist)
 {
 	char	c;
 
-	if (str[i] == 'c')
-	{
-		c = va_arg(vlist, int);
-		return (write(1, &c, 1));
-	}
-	else if (str[i] == 's')
+	if (str[i] == 's')
 		return (putstring(va_arg(vlist, char *)));
 	else if (str[i] == 'd' || str[i] == 'i')
 		return (putnumber(va_arg(vlist, int)));
@@ -85,6 +80,11 @@ static int	dispatcher(const char *str, int i, va_list vlist)
 		return (puthexa(va_arg(vlist, unsigned long), str[i], 1));
 	else if (str[i] == '%')
 		return (write(1, "%", 1));
+	else if (str[i] == 'c')
+	{
+		c = va_arg(vlist, int);
+		return (write(1, &c, 1));
+	}
 	return (!"SASSO");
 }
 
