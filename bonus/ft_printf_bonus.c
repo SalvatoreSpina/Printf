@@ -2,21 +2,16 @@
 
 void init_flag(const char *str, int *i, t_flag *flags, va_list args)
 {
-	flags->minus = 0;
-	flags->zero = 0;
 	flags->dot = 0;
-	flags->hash = 0;
-	flags->space = 0;
-	flags->plus = 0;
 	flags->precision = 0;
 	flags->width = 0;
 	while (!is_conversion(str[*i]) && is_flag(str[*i]))
 	{
-		flags->minus += (str[*i] == '-');
-		flags->zero += (str[*i] == '0');
-		flags->hash += (str[*i] == '#');
-		flags->plus += (str[*i] == '+');
-		flags->space += (str[*i] == ' ' && !flags->plus);
+		flags->minus = (str[*i] == '-');
+		flags->zero = (str[*i] == '0');
+		flags->hash = (str[*i] == '#');
+		flags->plus = (str[*i] == '+');
+		flags->space = (str[*i] == ' ' && !flags->plus);
 		if (str[*i] == '.')
 			flags->precision = atoi_asterisk(str, i, args) + flags->dot++;
 		else if (str[*i] == '*' || (str[*i] >= '1' && str[*i] <= '9'))
