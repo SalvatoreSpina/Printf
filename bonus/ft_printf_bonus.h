@@ -20,6 +20,8 @@ typedef struct	s_flags
 	int	width;			// 0-9
 } t_flag;
 
+int ft_printf(const char *str, ...);
+
 int put_c(int c, t_flag flags);
 int put_s(char *str, t_flag flags);
 int put_p(unsigned long p, t_flag flags);
