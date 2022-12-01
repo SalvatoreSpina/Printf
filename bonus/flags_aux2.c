@@ -26,7 +26,7 @@ int p_length(unsigned long n)
 	return (len);
 }
 
-int num_lengthgth(long n)
+int num_length(long n)
 {
 	int len;
 
