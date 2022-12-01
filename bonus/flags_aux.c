@@ -1,22 +1,22 @@
 #include "ft_printf_bonus.h"
 
-bool is_conversion(const char c)
+bool	is_conversion(const char c)
 {
 	return (c == 'c' || c == 's' || c == 'p'
 		|| c == 'd' || c == 'i' || c == 'u'
 		|| c == 'x' || c == 'X' || c == '%');
 }
 
-bool is_flag(const char c)
+bool	is_flag(const char c)
 {
 	return (c == '-' || c == '0' || c == '.'
 		|| c == '#' || c == ' ' || c == '+'
 		|| (c >= '0' && c <= '9'));
 }
 
-int put_other(char c, t_flag flags)
+int	put_other(char c, t_flag flags)
 {
-	int padding;
+	int	padding;
 
 	padding = flags.width - 1;
 	if (!c)
@@ -33,9 +33,9 @@ int put_other(char c, t_flag flags)
 	return (1);
 }
 
-int atoi_asterisk(const char *str, int *i, va_list args)
+int	atoi_asterisk(const char *str, int *i, va_list args)
 {
-	int nb;
+	int	nb;
 
 	nb = 0;
 	if (str[*i] == '.')
@@ -48,7 +48,7 @@ int atoi_asterisk(const char *str, int *i, va_list args)
 	return (nb);
 }
 
-void negative_asterisk(t_flag *flags)
+void	negative_asterisk(t_flag *flags)
 {
 	if (flags->precision < 0)
 	{

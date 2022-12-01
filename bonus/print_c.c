@@ -1,8 +1,8 @@
 #include "ft_printf_bonus.h"
 
-int put_minus_padding(char c, int width)
+int	put_minus_padding(char c, int width)
 {
-	int padding;
+	int	padding;
 
 	padding = 0;
 	write(1, &c, 1);
@@ -11,9 +11,9 @@ int put_minus_padding(char c, int width)
 	return (width);
 }
 
-int put_padded_char(char c, int width, char type)
+int	put_padded_char(char c, int width, char type)
 {
-	int padding;
+	int	padding;
 
 	padding = 0;
 	while (padding++ < width - 1)
@@ -22,12 +22,12 @@ int put_padded_char(char c, int width, char type)
 	return (width);
 }
 
-int put_char(char c)
+int	put_char(char c)
 {
 	return (write(1, &c, 1));
 }
 
-int put_c(int c, t_flag flags)
+int	put_c(int c, t_flag flags)
 {
 	if (flags.width > 0 && flags.minus)
 		return (put_minus_padding(c, flags.width));

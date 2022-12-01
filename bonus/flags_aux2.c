@@ -1,12 +1,12 @@
 #include "ft_printf_bonus.h"
 
-int x_length(unsigned int n)
+int	x_length(unsigned int n)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (!n)
-		return 1;
+		return (1);
 	while (n > 0)
 	{
 		n /= 16;
@@ -15,9 +15,9 @@ int x_length(unsigned int n)
 	return (len);
 }
 
-int p_length(unsigned long n)
+int	p_length(unsigned long n)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (n / 16 > 0)
@@ -26,13 +26,13 @@ int p_length(unsigned long n)
 	return (len);
 }
 
-int num_length(long n)
+int	num_length(long n)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (!n)
-		return 1;
+		return (1);
 	if (n < 0)
 	{
 		n = -n;
@@ -43,12 +43,12 @@ int num_length(long n)
 		n = n / 10;
 		len++;
 	}
-	return len;
+	return (len);
 }
 
-void put_prefix(int type, int *flag)
+void	put_prefix(int type, int *flag)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (type == 1)
@@ -60,7 +60,7 @@ void put_prefix(int type, int *flag)
 		(*flag) = write(1, " ", 1);
 }
 
-void flag_magic(int type, int *flag, long n)
+void	flag_magic(int type, int *flag, long n)
 {
 	if (type == 1 && n < 0)
 		(*flag) += 1;

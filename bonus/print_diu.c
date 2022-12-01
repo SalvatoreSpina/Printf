@@ -1,9 +1,9 @@
 #include "ft_printf_bonus.h"
 
-int put_basic_diu(long n)
+int	put_basic_diu(long n)
 {
-	int num;
-	int c;
+	int	num;
+	int	c;
 
 	num = 0;
 	if (n < 0)
@@ -18,11 +18,11 @@ int put_basic_diu(long n)
 	return (num);
 }
 
-int put_diu_precision_width(long n, t_flag flags)
+int	put_diu_precision_width(long n, t_flag flags)
 {
-	int printed;
-	int var_len;
-	int padding;
+	int	printed;
+	int	var_len;
+	int	padding;
 
 	printed = 0;
 	var_len = flags.precision - num_length(n);
@@ -34,7 +34,7 @@ int put_diu_precision_width(long n, t_flag flags)
 	while (flags.minus == 0 && padding-- > 0)
 		write(1, " ", 1);
 	if (n < 0)
-	    n *= (-1 * write(1, "-", 1));
+		n *= (-1 * write(1, "-", 1));
 	while (var_len-- > 0)
 		write(1, "0", 1);
 	put_basic_diu(n);
@@ -43,10 +43,10 @@ int put_diu_precision_width(long n, t_flag flags)
 	return (printed);
 }
 
-int put_diu_width(long n, t_flag flags)
+int	put_diu_width(long n, t_flag flags)
 {
-	int printed;
-	int padding;
+	int	printed;
+	int	padding;
 
 	printed = 0;
 	padding = flags.width - num_length(n);
@@ -58,10 +58,10 @@ int put_diu_width(long n, t_flag flags)
 	return (printed);
 }
 
-int put_diu_precision(long n, t_flag flags)
+int	put_diu_precision(long n, t_flag flags)
 {
-	int printed;
-	int var_len;
+	int	printed;
+	int	var_len;
 
 	printed = 0;
 	var_len = flags.width - num_length(n);
@@ -69,7 +69,8 @@ int put_diu_precision(long n, t_flag flags)
 		var_len = flags.precision - num_length(n);
 	if (n < 0 && flags.dot)
 		var_len--;
-	if (n < 0) {
+	if (n < 0)
+	{
 		printed += write(1, "-", 1);
 		n = -n;
 	}
@@ -79,9 +80,9 @@ int put_diu_precision(long n, t_flag flags)
 	return (printed);
 }
 
-int put_diu(long n, t_flag flags)
+int	put_diu(long n, t_flag flags)
 {
-	int idx;
+	int	idx;
 
 	idx = 0;
 	if (n > 0 && flags.plus)

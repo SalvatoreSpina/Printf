@@ -1,10 +1,10 @@
 #include "ft_printf_bonus.h"
 
-int put_x_basic(unsigned int n, bool uppercase)
+int	put_x_basic(unsigned int n, bool uppercase)
 {
-	char *base;
-	int printed;
-	int i;
+	char	*base;
+	int		printed;
+	int		i;
 
 	if (uppercase)
 		base = "0123456789ABCDEF";
@@ -18,10 +18,10 @@ int put_x_basic(unsigned int n, bool uppercase)
 	return (printed);
 }
 
-int put_x_precision(unsigned int n, t_flag flags, bool uppercase)
+int	put_x_precision(unsigned int n, t_flag flags, bool uppercase)
 {
-	int printed;
-	int var_len;
+	int	printed;
+	int	var_len;
 
 	printed = 0;
 	var_len = flags.width;
@@ -34,10 +34,10 @@ int put_x_precision(unsigned int n, t_flag flags, bool uppercase)
 	return (printed);
 }
 
-int put_x_width(unsigned int n, t_flag flags, bool uppercase)
+int	put_x_width(unsigned int n, t_flag flags, bool uppercase)
 {
-	int printed;
-	int padding;
+	int	printed;
+	int	padding;
 
 	printed = 0;
 	padding = flags.width - x_length(n);
@@ -49,11 +49,11 @@ int put_x_width(unsigned int n, t_flag flags, bool uppercase)
 	return (printed);
 }
 
-int put_x_width_precision(unsigned int n, t_flag flags, bool uppercase)
+int	put_x_width_precision(unsigned int n, t_flag flags, bool uppercase)
 {
-	int printed;
-	int var_len;
-	int padding;
+	int	printed;
+	int	var_len;
+	int	padding;
 
 	printed = 0;
 	var_len = flags.precision - x_length(n);
@@ -71,20 +71,17 @@ int put_x_width_precision(unsigned int n, t_flag flags, bool uppercase)
 	return (printed);
 }
 
-int put_x(unsigned int n, t_flag flags, char c)
+int	put_x(unsigned int n, t_flag flags, char c)
 {
-	int idx;
-	bool uppercase;
+	int		idx;
+	bool	uppercase;
 
 	idx = 0;
 	uppercase = (c == 'X');
-	if (n != 0 && flags.hash)
-	{
-		if (uppercase)
-			idx += write(1, "0X", 2);
-		else
-			idx += write(1, "0x", 2);
-	}
+	if (n && flags.hash && uppercase)
+		idx += write(1, "0X", 2);
+	else if (n && flags.hash && !uppercase)
+		idx += write(1, "0x", 2);
 	if (flags.dot && !flags.precision && !n)
 	{
 		flag_magic(1, &flags.width, n);
@@ -100,5 +97,4 @@ int put_x(unsigned int n, t_flag flags, char c)
 		return (idx + put_x_precision(n, flags, uppercase));
 	else
 		return (idx + put_x_basic(n, uppercase));
-	
 }

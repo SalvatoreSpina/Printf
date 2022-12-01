@@ -1,19 +1,19 @@
 #include "ft_printf_bonus.h"
 
-int string_length(char *str)
+int	string_length(char *str)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (str[len])
 		len++;
-	return len;
+	return (len);
 }
 
-int put_prec_pad_string(char *str, t_flag flags, int size, int width)
+int	put_prec_pad_string(char *str, t_flag flags, int size, int width)
 {
-	int i;
-	char c;
+	char	c;
+	int		i;
 
 	i = 0;
 	c = ' ';
@@ -26,15 +26,15 @@ int put_prec_pad_string(char *str, t_flag flags, int size, int width)
 	while (!flags.minus && i < flags.precision && str[i])
 		write(1, &str[i++], 1);
 	if (size > flags.width)
-		return size;
+		return (size);
 	return (flags.width);
 }
 
-int put_padded_string(char *str, t_flag flags)
+int	put_padded_string(char *str, t_flag flags)
 {
-	int padding;
-	int i;
-	char c;
+	char	c;
+	int		padding;
+	int		i;
 
 	i = 0;
 	padding = 0;
@@ -55,20 +55,20 @@ int put_padded_string(char *str, t_flag flags)
 	return (flags.width);
 }
 
-int put_precisioned_string(char *str, int size)
+int	put_precisioned_string(char *str, int size)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size && str[i])
 		write(1, &str[i++], 1);
-	return size;
+	return (size);
 }
 
-int put_s(char *str, t_flag flags)
+int	put_s(char *str, t_flag flags)
 {
-	int size;
-	int width;
+	int	size;
+	int	width;
 
 	size = flags.precision;
 	width = 0;

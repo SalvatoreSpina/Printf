@@ -1,6 +1,6 @@
 #include "ft_printf_bonus.h"
 
-void init_flag(const char *str, int *i, t_flag *flags, va_list args)
+void	init_flag(const char *str, int *i, t_flag *flags, va_list args)
 {
 	flags->dot = 0;
 	flags->precision = 0;
@@ -22,10 +22,10 @@ void init_flag(const char *str, int *i, t_flag *flags, va_list args)
 	}
 }
 
-int dispatcher(const char *str, int *i, va_list vlist)
+int	dispatcher(const char *str, int *i, va_list vlist)
 {
-	t_flag flags;
-	int printed;
+	t_flag	flags;
+	int		printed;
 
 	(*i)++;
 	init_flag(str, i, &flags, vlist);
@@ -34,25 +34,25 @@ int dispatcher(const char *str, int *i, va_list vlist)
 	else if (str[*i] == 's')
 		printed = put_s(va_arg(vlist, char *), flags);
 	else if (str[*i] == 'p')
-	 	printed = put_p(va_arg(vlist, unsigned long), flags);
+		printed = put_p(va_arg(vlist, unsigned long), flags);
 	else if (str[*i] == 'd' || str[*i] == 'i')
 		printed = put_diu(va_arg(vlist, int), flags);
 	else if (str[*i] == 'u')
 		printed = put_diu(va_arg(vlist, unsigned int), flags);
 	else if (str[*i] == 'x' || str[*i] == 'X')
-	 	printed = put_x(va_arg(vlist, unsigned int), flags, str[*i]);
+		printed = put_x(va_arg(vlist, unsigned int), flags, str[*i]);
 	else
-	 	printed = put_other(str[*i], flags);
+		printed = put_other(str[*i], flags);
 	if (str[*i])
 		(*i)++;
 	return (printed);
 }
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
-	va_list vlist;
-	int i;
-	int printed;
+	va_list	vlist;
+	int		i;
+	int		printed;
 
 	i = 0;
 	printed = 0;

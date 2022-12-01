@@ -1,10 +1,10 @@
 #include "ft_printf_bonus.h"
 
-int put_basic_p(unsigned long n, int start)
+int	put_basic_p(unsigned long n, int start)
 {
-	char *base;
-	int i;
-	int printed;
+	char	*base;
+	int		i;
+	int		printed;
 
 	printed = 0;
 	if (start)
@@ -17,10 +17,10 @@ int put_basic_p(unsigned long n, int start)
 	return (printed);
 }
 
-int put_p_width(unsigned long n, t_flag flags)
+int	put_p_width(unsigned long n, t_flag flags)
 {
-	int padding;
-	int printed;
+	int	padding;
+	int	printed;
 
 	printed = 0;
 	padding = flags.width - 2;
@@ -35,11 +35,11 @@ int put_p_width(unsigned long n, t_flag flags)
 	return (printed);
 }
 
-int put_p_precision(unsigned long n, t_flag flags)
+int	put_p_precision(unsigned long n, t_flag flags)
 {
-	char *base;
-	int printed;
-	int var_len;
+	char	*base;
+	int		printed;
+	int		var_len;
 
 	base = "0123456789abcdef";
 	printed = write(1, "0x", 2);
@@ -52,14 +52,14 @@ int put_p_precision(unsigned long n, t_flag flags)
 	if (n / 16 > 0)
 		printed += put_basic_p(n / 16, 0);
 	printed += write(1, &base, 1);
-	return printed;
+	return (printed);
 }
 
-int put_p_precision_width(unsigned long n, t_flag flags)
+int	put_p_precision_width(unsigned long n, t_flag flags)
 {
-	int printed;
-	int padding;
-	int var_len;
+	int	printed;
+	int	padding;
+	int	var_len;
 
 	var_len = flags.precision - p_length(n);
 	if (var_len <= 0)
@@ -79,9 +79,9 @@ int put_p_precision_width(unsigned long n, t_flag flags)
 	return (printed);
 }
 
-int put_p(unsigned long n, t_flag flags)
+int	put_p(unsigned long n, t_flag flags)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (flags.dot && !flags.precision && !n)
