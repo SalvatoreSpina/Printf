@@ -27,7 +27,7 @@ int put_char(char c)
 	return (write(1, &c, 1));
 }
 
-int print_c(char c, t_flag flags)
+int put_c(int c, t_flag flags)
 {
 	if (flags.width > 0 && flags.minus)
 		return (put_minus_padding(c, flags.width));

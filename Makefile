@@ -39,6 +39,10 @@ tester:
 test:
 	@make tester 2> /dev/null
 	@cd printfTester && make m
+
+testb:
+	@make tester 2> /dev/null
+	@cd printfTester && make b
 	
 norm:
 	@norminette mandatory/
