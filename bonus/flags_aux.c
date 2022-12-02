@@ -47,18 +47,3 @@ int	atoi_asterisk(const char *str, int *i, va_list args)
 	(*i)--;
 	return (nb);
 }
-
-void	negative_asterisk(t_flag *flags)
-{
-	if (flags->precision < 0)
-	{
-		flags->dot = 0;
-		flags->precision = 0;
-	}
-	else if (flags->width < 0)
-	{
-		flags->minus = 1;
-		flags->width *= -1;
-	}
-	return ;
-}

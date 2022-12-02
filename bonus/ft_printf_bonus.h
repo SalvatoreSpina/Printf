@@ -8,16 +8,14 @@
 
 typedef struct s_flags
 {
-	int	minus;
-	int	zero;
-	int	dot;
-
-	int	hash;
-	int	space;
-	int	plus;
-
-	int	precision;	
-	int	width;
+	bool	minus;
+	bool	zero;
+	bool	dot;
+	bool	hash;
+	bool	space;
+	bool	plus;
+	int		precision;	
+	int		width;
 }	t_flag;
 
 int		ft_printf(const char *str, ...);

@@ -31,8 +31,13 @@ void	set_flags(const char *str, int *i, t_flag *flags, va_list vlist)
 			flags->precision = atoi_asterisk(str, i, vlist) + flags->dot++;
 		else if (str[*i] == '*' || (str[*i] >= '1' && str[*i] <= '9'))
 			flags->width = atoi_asterisk(str, i, vlist);
-		if (flags->precision < 0 || flags->width < 0)
-			negative_asterisk(flags);
+		if (flags->precision < 0)
+			flags->precision = --flags->dot;
+		else if (flags->width < 0)
+		{
+			flags->minus = 1;
+			flags->width *= -1;
+		}
 		(*i)++;
 	}
 }

@@ -88,5 +88,7 @@ int	put_s(char *str, t_flag flags)
 		return (put_padded_string(str, flags));
 	else if (flags.dot)
 		return (put_precisioned_string(str, precision));
-	return (write(1, &str, string_length(str)));
+	while (str[width])
+		write(1, &str[width++], 1);
+	return (width);
 }
