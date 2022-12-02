@@ -70,14 +70,13 @@ int	put_precisioned_string(char *str, int size)
 
 int	put_s(char *str, t_flag flags)
 {
-	static char	null[8] = "(null)";
 	int			precision;
 	int			width;
 
 	precision = flags.precision;
 	width = 0;
 	if (str == NULL)
-		str = null;
+		str = "(null)";
 	if (flags.precision > string_length(str))
 		precision = string_length(str);
 	if (flags.width > precision)
