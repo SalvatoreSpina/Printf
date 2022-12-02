@@ -30,7 +30,6 @@ int		put_other(char c, t_flag flags);
 bool	is_conversion(char c);
 bool	is_flag(char c);
 int		atoi_asterisk(const char *str, int *i, va_list args);
-void	negative_asterisk(t_flag *flags);
 
 void	put_prefix(int type, int *flag);
 void	flag_magic(int type, int *flag, long n);

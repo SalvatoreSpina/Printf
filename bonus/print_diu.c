@@ -85,7 +85,7 @@ int	put_diu(long n, t_flag flags)
 	int	idx;
 
 	idx = 0;
-	if (n > 0 && flags.plus)
+	if (n >= 0 && flags.plus)
 		put_prefix(2, &idx);
 	if (n >= 0 && flags.space && !flags.plus)
 		put_prefix(3, &idx);
