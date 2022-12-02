@@ -7,10 +7,7 @@ int	put_basic_diu(long n)
 
 	num = 0;
 	if (n < 0)
-	{
-		num += write(1, "-", 1);
-		n *= -1;
-	}
+		n *= -1 * write(1, "-", 1) + num++;
 	if (n > 9)
 		num += put_basic_diu(n / 10);
 	c = n % 10 + '0';
@@ -70,10 +67,7 @@ int	put_diu_precision(long n, t_flag flags)
 	if (n < 0 && flags.dot)
 		var_len++;
 	if (n < 0)
-	{
-		printed += write(1, "-", 1);
-		n = -n;
-	}
+		n *= (-1 * write(1, "-", 1)) + printed++ * 0;
 	while (var_len-- > 0)
 		printed += write(1, "0", 1);
 	printed += put_basic_diu(n);

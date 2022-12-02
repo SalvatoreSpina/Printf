@@ -83,10 +83,7 @@ int	put_x(unsigned int n, t_flag flags, char c)
 	else if (n && flags.hash && !uppercase)
 		idx += write(1, "0x", 2);
 	if (flags.dot && !flags.precision && !n)
-	{
-		flag_magic(1, &flags.width, n);
-		return (flags.width);
-	}
+		return (flag_magic(1, &flags.width, n), flags.width);
 	else if (flags.width > 0 && flags.dot)
 		return (idx + put_x_width_precision(n, flags, uppercase));
 	else if (flags.width > 0 && !flags.zero)

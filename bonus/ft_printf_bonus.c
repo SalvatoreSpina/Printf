@@ -34,10 +34,7 @@ void	set_flags(const char *str, int *i, t_flag *flags, va_list vlist)
 		if (flags->precision < 0)
 			flags->precision = --flags->dot;
 		else if (flags->width < 0)
-		{
-			flags->minus = 1;
-			flags->width *= -1;
-		}
+			flags->width *= -1 * flags->minus++;
 		(*i)++;
 	}
 }
