@@ -68,7 +68,7 @@ int	put_diu_precision(long n, t_flag flags)
 	if (flags.dot)
 		var_len = flags.precision - num_length(n);
 	if (n < 0 && flags.dot)
-		var_len--;
+		var_len++;
 	if (n < 0)
 	{
 		printed += write(1, "-", 1);
