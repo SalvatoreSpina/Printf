@@ -43,7 +43,7 @@ int	atoi_asterisk(const char *str, int *i, va_list args)
 	if (str[*i] == '*')
 		return (va_arg(args, unsigned int));
 	while (str[*i] >= '0' && str[*i] <= '9')
-		nb = nb * 10 + (str[*i++] - '0');
+		nb = nb * 10 + (str[(*i)++] - '0');
 	(*i)--;
 	return (nb);
 }
