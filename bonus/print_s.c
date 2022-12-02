@@ -21,8 +21,10 @@ int	put_prec_pad_string(char *str, t_flag flags, int size, int width)
 		c = '0';
 	while (flags.minus && i < flags.precision && str[i])
 		write(1, &str[i++], 1);
-	while (width--)
+	i = 0;
+	while (i++ < width)
 		write(1, &c, 1);
+	i = 0;
 	while (!flags.minus && i < flags.precision && str[i])
 		write(1, &str[i++], 1);
 	if (size > flags.width)
@@ -44,12 +46,13 @@ int	put_padded_string(char *str, t_flag flags)
 	if (flags.width > string_length(str))
 		padding = flags.width - string_length(str);
 	while (flags.minus && str[i])
-		write(1, &str[i], 1);
-	while (padding--)
+		write(1, &str[i++], 1);
+	i = 0;
+	while (i++ < padding)
 		write(1, &c, 1);
 	i = 0;
 	while (!flags.minus && str[i])
-		write(1, &str[i], 1);
+		write(1, &str[i++], 1);
 	if (string_length(str) > flags.width)
 		return (string_length(str));
 	return (flags.width);
@@ -67,22 +70,23 @@ int	put_precisioned_string(char *str, int size)
 
 int	put_s(char *str, t_flag flags)
 {
-	int	size;
-	int	width;
+	static char	null[8] = "(null)";
+	int			precision;
+	int			width;
 
-	size = flags.precision;
+	precision = flags.precision;
 	width = 0;
-	if (!str)
-		str = "(null)";
+	if (str == NULL)
+		str = null;
 	if (flags.precision > string_length(str))
-		size = string_length(str);
-	if (flags.width > size)
-		width = flags.width - size;
-	if (flags.width && flags.dot)
-		return (put_prec_pad_string(str, flags, size, width));
-	else if (flags.width)
+		precision = string_length(str);
+	if (flags.width > precision)
+		width = flags.width - precision;
+	if (flags.width > 0 && flags.dot)
+		return (put_prec_pad_string(str, flags, precision, width));
+	else if (flags.width > 0)
 		return (put_padded_string(str, flags));
 	else if (flags.dot)
-		return (put_precisioned_string(str, size));
+		return (put_precisioned_string(str, precision));
 	return (write(1, &str, string_length(str)));
 }

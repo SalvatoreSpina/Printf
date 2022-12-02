@@ -13,7 +13,7 @@ void	init_flag(const char *str, int *i, t_flag *flags, va_list args)
 		flags->plus = (str[*i] == '+');
 		flags->space = (str[*i] == ' ' && !flags->plus);
 		if (str[*i] == '.')
-			flags->precision = atoi_asterisk(str, i, args) + flags->dot++;
+			flags->precision = atoi_asterisk(str, i, args) + 0 * ++(flags->dot);
 		else if (str[*i] == '*' || (str[*i] >= '1' && str[*i] <= '9'))
 			flags->width = atoi_asterisk(str, i, args);
 		if (flags->precision < 0 || flags->width < 0)
@@ -61,8 +61,11 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 			printed += dispatcher(str, &i, vlist);
-		else
-			printed += write(1, &str[i++], 1);
+		else {
+			write(1, &str[i++], 1);
+			printed++;
+		}
+		//printed += write(1, &str[i++], 1);
 	}
 	va_end(vlist);
 	return (printed);

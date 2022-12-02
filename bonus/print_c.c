@@ -31,7 +31,7 @@ int	put_c(int c, t_flag flags)
 {
 	if (flags.width > 0 && flags.minus)
 		return (put_minus_padding(c, flags.width));
-	else if (flags.width > 0 && flags.zero == 1)
+	else if (flags.width > 0 && flags.zero)
 		return (put_padded_char(c, flags.width, '0'));
 	else if (flags.width > 0)
 		return (put_padded_char(c, flags.width, ' '));

@@ -58,7 +58,7 @@ void	negative_asterisk(t_flag *flags)
 	else if (flags->width < 0)
 	{
 		flags->minus = 1;
-		flags->width = -flags->width;
+		flags->width *= -1;
 	}
 	return ;
 }
