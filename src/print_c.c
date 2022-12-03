@@ -6,11 +6,11 @@
 /*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:44:40 by sspina            #+#    #+#             */
-/*   Updated: 2022/12/03 11:44:41 by sspina           ###   ########.fr       */
+/*   Updated: 2022/12/03 15:54:26 by sspina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 static int	put_minus_padding(char c, int width)
 {

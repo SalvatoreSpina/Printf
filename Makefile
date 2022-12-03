@@ -1,37 +1,30 @@
-NAME = libftprintf.a
+SRCS = 	src/ft_printf.c src/print_c.c src/print_s.c src/print_p.c src/print_x.c src/print_diu.c src/print_helps.c src/flags_aux.c
 
-CC = gcc
+NAME  = libftprintf.a
+
+CC    = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-CL = rm -rf
-
-SRC =	mandatory/ft_printf.c
-
-SRCB =	bonus/ft_printf_bonus.c bonus/print_c.c bonus/print_s.c bonus/print_p.c bonus/print_x.c bonus/print_diu.c bonus/print_helps.c bonus/flags_aux.c
-
-OBJ = $(SRC:.c=.o)
-
-OBJB = $(SRCB:.c=.o)
-
-$(NAME): $(OBJ)
-	@ar r $(NAME) $(OBJ)
+OBJS  = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+bonus: $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJS)
+	@ar crs $(NAME) $(OBJS)
+
 clean:
-	@$(CL) $(OBJ) $(OBJB)
+	@rm -f $(OBJS)
 
 fclean: clean
-	@$(CL) $(NAME)
-
-cleant:
-	@rm -rf printfTester
+	@rm -f $(NAME)
 
 re: fclean all
-
-bonus: fclean $(OBJB)
-	@ar r $(NAME) $(OBJB)
 
 tester:
 	@git clone https://github.com/Tripouille/printfTester.git 2> /dev/null || true
@@ -47,5 +40,4 @@ testb:
 	@cd printfTester && make b
 	
 norm:
-	@norminette mandatory/
-	@norminette bonus/
+	@norminette src/
