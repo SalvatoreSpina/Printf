@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 12:01:45 by sspina            #+#    #+#             */
-/*   Updated: 2022/11/24 13:18:32 by sspina           ###   ########.fr       */
+/*   Created: 2022/12/03 11:05:19 by sspina            #+#    #+#             */
+/*   Updated: 2022/12/03 11:05:21 by sspina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	putstring(char *str)
+static int	put_s(char *str)
 {
 	int	i;
 
@@ -21,70 +21,64 @@ static int	putstring(char *str)
 		while (str[i])
 			i += write(1, &str[i], 1);
 	else
-		i += putstring("(null)");
+		i += put_s("(null)");
 	return (i);
 }
 
-static int	putnumber(long l)
+static int	put_diu(long l)
 {
-	int	nb;
+	int	printed;
 	int	c;
 
-	nb = 0;
+	printed = 0;
 	if (l < 0)
-	{
-		nb += write(1, "-", 1);
-		l *= -1;
-	}
+		l *= -write(1, "-", 1) + printed++ ;
 	if (l > 9)
-		nb += putnumber(l / 10);
+		printed += put_diu(l / 10);
 	c = l % 10 + '0';
 	write(1, &c, 1);
-	return (++nb);
+	return (++printed);
 }
 
-static int	puthexa(unsigned long ul, char c, int n)
+static int	put_xp(unsigned long ul, char c, bool prefix)
 {
-	char	*set;
-	int		nb;
+	char	*base;
+	int		printed;
 
-	nb = 0;
+	printed = 0;
 	if (c == 'X')
-		set = "0123456789ABCDEF";
+		base = "0123456789ABCDEF";
 	else
-		set = "0123456789abcdef";
+		base = "0123456789abcdef";
 	if (c == 'p')
 	{
-		if (n == 1)
-			nb += putstring("0x");
+		if (prefix)
+			printed += put_s("0x");
 		if (ul / 16 > 0)
-			nb += puthexa(ul / 16, c, 0);
+			printed += put_xp(ul / 16, c, 0);
 	}
 	else if ((unsigned int)ul / 16 > 0)
-		nb += puthexa((unsigned int)ul / 16, c, 0);
-	write(1, &set[ul % 16], 1);
-	return (++nb);
+		printed += put_xp((unsigned int)ul / 16, c, 0);
+	write(1, &base[ul % 16], 1);
+	return (++printed);
 }
 
 static int	dispatcher(const char *str, int i, va_list vlist)
 {
 	char	c;
 
-	if (str[i] == 's')
-		return (putstring(va_arg(vlist, char *)));
+	if (str[i] == 'c')
+		return (c = va_arg(vlist, int), write(1, &c, 1));
+	else if (str[i] == 's')
+		return (put_s(va_arg(vlist, char *)));
 	else if (str[i] == 'd' || str[i] == 'i')
-		return (putnumber(va_arg(vlist, int)));
+		return (put_diu(va_arg(vlist, int)));
 	else if (str[i] == 'u')
-		return (putnumber(va_arg(vlist, unsigned int)));
+		return (put_diu(va_arg(vlist, unsigned int)));
 	else if (str[i] == 'x' || str[i] == 'X' || str[i] == 'p')
-		return (puthexa(va_arg(vlist, unsigned long), str[i], 1));
+		return (put_xp(va_arg(vlist, unsigned long), str[i], 1));
 	else if (str[i] == '%')
 		return (write(1, "%", 1));
-	else if (str[i] == 'c')
-	{
-		c = va_arg(vlist, int);
-		return (write(1, &c, 1));
-	}
 	return (!"SASSO");
 }
 
