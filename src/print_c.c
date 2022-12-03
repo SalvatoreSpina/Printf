@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "printf.h"
 
 static int	put_minus_padding(char c, int width)
 {

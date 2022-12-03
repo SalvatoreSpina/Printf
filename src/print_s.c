@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "printf.h"
 
 static int	string_length(char *str)
 {

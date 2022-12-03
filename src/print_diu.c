@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "printf.h"
 
 static int	put_basic_diu(long n)
 {

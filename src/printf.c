@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "printf.h"
 
 static void	init_flags(t_flag *flags)
 {

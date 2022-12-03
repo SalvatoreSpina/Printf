@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "printf.h"
 
 inline bool	is_conversion(const char c)
 {
