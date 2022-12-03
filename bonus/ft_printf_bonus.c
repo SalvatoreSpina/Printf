@@ -6,7 +6,7 @@
 /*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:44:07 by sspina            #+#    #+#             */
-/*   Updated: 2022/12/03 11:44:08 by sspina           ###   ########.fr       */
+/*   Updated: 2022/12/03 13:00:35 by sspina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	set_flags(const char *str, int *i, t_flag *flags, va_list args)
 		if (flags->precision < 0)
 			flags->precision = --flags->dot;
 		else if (flags->width < 0)
-			flags->width *= -1 * ++flags->minus;
+			flags->width *= -1 * flags->minus++;
 		(*i)++;
 	}
 }

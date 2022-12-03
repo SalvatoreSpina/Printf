@@ -6,7 +6,7 @@
 /*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 11:44:02 by sspina            #+#    #+#             */
-/*   Updated: 2022/12/03 11:44:04 by sspina           ###   ########.fr       */
+/*   Updated: 2022/12/03 12:58:43 by sspina           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	put_diu_precision(long n, t_flag flags)
 	if (n < 0 && flags.dot)
 		var_len++;
 	if (n < 0)
-		n *= -1 + !write(1, "-", 1) + !(printed++);
+		n = n * -write(1, "-", 1) + printed++;
 	while (var_len-- > 0)
 		printed += write(1, "0", 1);
 	printed += put_basic_diu(n);
