@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_s.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 11:45:06 by sspina            #+#    #+#             */
+/*   Updated: 2022/12/03 11:45:07 by sspina           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
-int	string_length(char *str)
+static int	string_length(char *str)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
 	while (str[len])
@@ -10,7 +22,7 @@ int	string_length(char *str)
 	return (len);
 }
 
-int	put_prec_pad_string(char *str, t_flag flags, int size, int width)
+static int	put_prec_pad_string(char *str, t_flag flags, int size, int width)
 {
 	char	c;
 	int		i;
@@ -32,7 +44,7 @@ int	put_prec_pad_string(char *str, t_flag flags, int size, int width)
 	return (flags.width);
 }
 
-int	put_padded_string(char *str, t_flag flags)
+static int	put_padded_string(char *str, t_flag flags)
 {
 	char	c;
 	int		padding;
@@ -58,7 +70,7 @@ int	put_padded_string(char *str, t_flag flags)
 	return (flags.width);
 }
 
-int	put_precisioned_string(char *str, int size)
+static int	put_precisioned_string(char *str, int size)
 {
 	int	i;
 

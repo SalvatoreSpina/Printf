@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_diu.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 11:44:02 by sspina            #+#    #+#             */
+/*   Updated: 2022/12/03 11:44:04 by sspina           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
-int	put_basic_diu(long n)
+static int	put_basic_diu(long n)
 {
 	int	num;
 	int	c;
@@ -15,7 +27,7 @@ int	put_basic_diu(long n)
 	return (num);
 }
 
-int	put_diu_precision_width(long n, t_flag flags)
+static int	put_diu_precision_width(long n, t_flag flags)
 {
 	int	printed;
 	int	var_len;
@@ -28,7 +40,7 @@ int	put_diu_precision_width(long n, t_flag flags)
 	padding = flags.width - num_length(n) - var_len;
 	flag_magic(2, &padding, n);
 	printed += padding + var_len + num_length(n);
-	while (flags.minus == 0 && padding-- > 0)
+	while (!flags.minus && padding-- > 0)
 		write(1, " ", 1);
 	if (n < 0)
 		n *= (-1 * write(1, "-", 1));
@@ -40,22 +52,22 @@ int	put_diu_precision_width(long n, t_flag flags)
 	return (printed);
 }
 
-int	put_diu_width(long n, t_flag flags)
+static int	put_diu_width(long n, t_flag flags)
 {
 	int	printed;
 	int	padding;
 
 	printed = 0;
 	padding = flags.width - num_length(n);
-	while (flags.minus == 0 && padding-- > 0)
+	while (!flags.minus && padding-- > 0)
 		printed += write(1, " ", 1);
 	printed += put_basic_diu(n);
-	while (flags.minus == 1 && padding-- > 0)
+	while (flags.minus && padding-- > 0)
 		printed += write(1, " ", 1);
 	return (printed);
 }
 
-int	put_diu_precision(long n, t_flag flags)
+static int	put_diu_precision(long n, t_flag flags)
 {
 	int	printed;
 	int	var_len;
@@ -67,7 +79,7 @@ int	put_diu_precision(long n, t_flag flags)
 	if (n < 0 && flags.dot)
 		var_len++;
 	if (n < 0)
-		n *= (-1 * write(1, "-", 1)) + printed++ * 0;
+		n *= -1 + !write(1, "-", 1) + !(printed++);
 	while (var_len-- > 0)
 		printed += write(1, "0", 1);
 	printed += put_basic_diu(n);
@@ -86,13 +98,13 @@ int	put_diu(long n, t_flag flags)
 	if (flags.dot && !flags.precision && !n)
 		return (put_prefix(1, &flags.width), flags.width);
 	else if (flags.width > 0 && flags.dot)
-		return (put_diu_precision_width(n, flags) + idx);
+		return (idx + put_diu_precision_width(n, flags));
 	else if (flags.width > 0 && !flags.zero)
-		return (put_diu_width(n, flags) + idx);
+		return (idx + put_diu_width(n, flags));
 	else if (flags.width > 0 && flags.zero && flags.minus)
-		return (put_diu_width(n, flags) + idx);
+		return (idx + put_diu_width(n, flags));
 	else if (flags.dot || (flags.width > 0 && flags.zero))
-		return (put_diu_precision(n, flags) + idx);
+		return (idx + put_diu_precision(n, flags));
 	else
-		return (put_basic_diu(n) + idx);
+		return (idx + put_basic_diu(n));
 }

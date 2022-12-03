@@ -8,7 +8,7 @@ CL = rm -rf
 
 SRC =	mandatory/ft_printf.c
 
-SRCB =	bonus/ft_printf_bonus.c bonus/print_c.c bonus/print_s.c bonus/print_p.c bonus/print_x.c bonus/print_diu.c bonus/flags_aux.c bonus/flags_aux2.c
+SRCB =	bonus/ft_printf_bonus.c bonus/print_c.c bonus/print_s.c bonus/print_p.c bonus/print_x.c bonus/print_diu.c bonus/print_helps.c bonus/flags_aux.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -37,10 +37,12 @@ tester:
 	@git clone https://github.com/Tripouille/printfTester.git 2> /dev/null || true
 
 test:
+	@make fclean 2> /dev/null
 	@make tester 2> /dev/null
 	@cd printfTester && make m
 
 testb:
+	@make fclean 2> /dev/null
 	@make tester 2> /dev/null
 	@cd printfTester && make b
 	

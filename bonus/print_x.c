@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_x.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 11:44:55 by sspina            #+#    #+#             */
+/*   Updated: 2022/12/03 11:44:56 by sspina           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
-int	put_x_basic(unsigned int n, bool uppercase)
+static int	put_x_basic(unsigned int n, bool uppercase)
 {
 	char	*base;
 	int		printed;
 	int		i;
 
+	base = "0123456789abcdef";
 	if (uppercase)
 		base = "0123456789ABCDEF";
-	else
-		base = "0123456789abcdef";
 	printed = 0;
 	if (n / 16 > 0)
 		printed += put_x_basic(n / 16, uppercase);
@@ -18,7 +29,7 @@ int	put_x_basic(unsigned int n, bool uppercase)
 	return (printed);
 }
 
-int	put_x_precision(unsigned int n, t_flag flags, bool uppercase)
+static int	put_x_precision(unsigned int n, t_flag flags, bool uppercase)
 {
 	int	printed;
 	int	var_len;
@@ -34,7 +45,7 @@ int	put_x_precision(unsigned int n, t_flag flags, bool uppercase)
 	return (printed);
 }
 
-int	put_x_width(unsigned int n, t_flag flags, bool uppercase)
+static int	put_x_width(unsigned int n, t_flag flags, bool uppercase)
 {
 	int	printed;
 	int	padding;
@@ -49,7 +60,7 @@ int	put_x_width(unsigned int n, t_flag flags, bool uppercase)
 	return (printed);
 }
 
-int	put_x_width_precision(unsigned int n, t_flag flags, bool uppercase)
+static int	put_x_width_precision(unsigned int n, t_flag flags, bool uppercase)
 {
 	int	printed;
 	int	var_len;

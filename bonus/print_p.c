@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_p.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 11:44:47 by sspina            #+#    #+#             */
+/*   Updated: 2022/12/03 11:44:48 by sspina           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
-int	put_basic_p(unsigned long n, int start)
+static int	put_basic_p(unsigned long n, int start)
 {
 	char	*base;
 	int		i;
@@ -17,7 +29,7 @@ int	put_basic_p(unsigned long n, int start)
 	return (printed);
 }
 
-int	put_p_width(unsigned long n, t_flag flags)
+static int	put_p_width(unsigned long n, t_flag flags)
 {
 	int	padding;
 	int	printed;
@@ -35,7 +47,7 @@ int	put_p_width(unsigned long n, t_flag flags)
 	return (printed);
 }
 
-int	put_p_precision(unsigned long n, t_flag flags)
+static int	put_p_precision(unsigned long n, t_flag flags)
 {
 	char	*base;
 	int		printed;
@@ -55,7 +67,7 @@ int	put_p_precision(unsigned long n, t_flag flags)
 	return (printed);
 }
 
-int	put_p_precision_width(unsigned long n, t_flag flags)
+static int	put_p_precision_width(unsigned long n, t_flag flags)
 {
 	int	printed;
 	int	padding;
@@ -91,7 +103,7 @@ int	put_p(unsigned long n, t_flag flags)
 		write(1, "0x", 2);
 		while (flags.minus && i++ < flags.width - 2)
 			write(1, " ", 1);
-		return (i + 1);
+		return (++i);
 	}
 	if (flags.width > 0 && flags.dot)
 		return (put_p_precision_width(n, flags));

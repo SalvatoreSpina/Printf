@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_c.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sspina <sspina@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 11:44:40 by sspina            #+#    #+#             */
+/*   Updated: 2022/12/03 11:44:41 by sspina           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
-int	put_minus_padding(char c, int width)
+static int	put_minus_padding(char c, int width)
 {
 	int	padding;
 
@@ -11,7 +23,7 @@ int	put_minus_padding(char c, int width)
 	return (width);
 }
 
-int	put_padded_char(char c, int width, char type)
+static int	put_padded_char(char c, int width, char type)
 {
 	int	padding;
 
@@ -22,7 +34,7 @@ int	put_padded_char(char c, int width, char type)
 	return (width);
 }
 
-int	put_char(char c)
+static int	put_char(char c)
 {
 	return (write(1, &c, 1));
 }
